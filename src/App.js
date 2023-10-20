@@ -1,25 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Navigation from "./components/Navigation";
+import Film from "./components/Films";
+import Footer from "./Footer";
+// import Main from "./components/Main";
+import Detail from "./components/Detail";
+import { ThemeContext } from "./components/ThemeContext";
+import { useContext } from "react";
+
+import {
+  Routes,
+  Route,
+} from "react-router-dom";
 
 function App() {
+  const { theme, toggle, dark } = useContext(ThemeContext);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App" style={{ backgroundColor: theme.backgroundColor, color: theme.color }}>
+      <Navigation />
+      <Routes>
+        <Route path='/' element={<Film />}></Route>
+        <Route path='/detail/:id' element={<Detail />}></Route>
+
+        {/* <Route path='/contact' element={<Contact />}></Route> */}
+        {/* <Route path='/trailer/:id' element={<Trailer />}></Route> */}
+      </Routes>
+      <Footer />
     </div>
   );
 }
-
 export default App;
